@@ -17,6 +17,8 @@ class Game:
         self.ball.moveDown()
     def on_init(self):
         pygame.init()
+        pygame.mixer.music.load('sounds/bgm.mp3')
+        pygame.mixer.music.play(-1)
         self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         self._running = True
         self.ball = Ball()
