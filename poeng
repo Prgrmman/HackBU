@@ -14,7 +14,7 @@ class Game:
 
     def on_key_down(self, event):
         print("You pressed a key")
-        self.screen.fill((0,0,0))
+        self.screen.fill((255,0,255))
         self.cat.moveDown()
     def on_init(self):
         pygame.init()
@@ -52,7 +52,7 @@ class Game:
 # This is a cat object
 class Cat:
     def __init__(self):
-        self.image = pygame.image.load("cat.png").convert()
+        self.image = pygame.image.load("cat.gif").convert()
         self.position = (0,0)
     def moveDown(self):
         x = self.position[0]
