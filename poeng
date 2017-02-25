@@ -17,8 +17,8 @@ class Game:
     def on_init(self):
         pygame.init()
         self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
-        self._catImage = pygame.image.load("cat.png").convert()
         self._running = True
+        self.cat = Cat()
 
     def on_event(self, event):
         if event.type == pygame.QUIT:
@@ -30,7 +30,7 @@ class Game:
         pass
 
     def on_render(self):
-        self._display_surf.blit(self._catImage, (0,0))
+        self._display_surf.blit(self.cat.image, self.cat.position)
         pygame.display.flip()
 
     def on_cleanup(self):
@@ -47,6 +47,11 @@ class Game:
                 self.on_render()
         self.on_cleanup()
 
+# This is a cat object
+class Cat:
+    def __init__(self):
+        self.image = pygame.image.load("cat.png").convert()
+        self.position = (0,0)
 
 
 if __name__ == "__main__" :
