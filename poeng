@@ -14,9 +14,7 @@ class Game:
         self.size = self.weight, self.height = 1280, 960
 
     def on_key_down(self, event):
-        self.screen.fill((255,0,255))
         self.ball.moveDown()
-        self.ball.scale()
     def on_init(self):
         pygame.init()
         self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
@@ -33,6 +31,7 @@ class Game:
         pass
 
     def on_render(self):
+        self.drawBackgound()
         self.screen.blit(self.ball.image, self.ball.position)
         pygame.display.flip()
 
@@ -50,6 +49,8 @@ class Game:
                 self.on_render()
         self.on_cleanup()
 
+    def drawBackgound(self):
+        self.screen.fill((0,0,0))
 
 
 if __name__ == "__main__" :

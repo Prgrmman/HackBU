@@ -4,7 +4,7 @@ from pygame.locals import *
 # This is a ball object
 class Ball:
     def __init__(self):
-        self.image = pygame.image.load("cat.gif").convert()
+        self.image = pygame.image.load("assets/cat.gif").convert()
         self.position = (0,0)
     def moveDown(self):
         x = self.position[0]
