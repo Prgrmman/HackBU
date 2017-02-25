@@ -12,6 +12,8 @@ class Game:
         self._display_surf = None
         self.size = self.weight, self.height = 1280, 960
 
+    def on_key_down(self, event):
+        print("You pressed a key")
     def on_init(self):
         pygame.init()
         self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
@@ -21,6 +23,8 @@ class Game:
     def on_event(self, event):
         if event.type == pygame.QUIT:
             self._running = False
+        elif event.type == KEYDOWN:
+            self.on_key_down(event)
 
     def on_loop(self):
         pass
@@ -42,6 +46,8 @@ class Game:
                 self.on_loop()
                 self.on_render()
         self.on_cleanup()
+
+
 
 if __name__ == "__main__" :
     game = Game()
