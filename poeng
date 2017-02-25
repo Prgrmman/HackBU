@@ -9,14 +9,16 @@ from pygame.locals import *
 class Game:
     def __init__(self):
         self._running = True
-        self._display_surf = None
+        self.screen = None
         self.size = self.weight, self.height = 1280, 960
 
     def on_key_down(self, event):
         print("You pressed a key")
+        self.screen.fill((0,0,0))
+        self.cat.moveDown()
     def on_init(self):
         pygame.init()
-        self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
+        self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         self._running = True
         self.cat = Cat()
 
@@ -30,7 +32,7 @@ class Game:
         pass
 
     def on_render(self):
-        self._display_surf.blit(self.cat.image, self.cat.position)
+        self.screen.blit(self.cat.image, self.cat.position)
         pygame.display.flip()
 
     def on_cleanup(self):
@@ -52,6 +54,10 @@ class Cat:
     def __init__(self):
         self.image = pygame.image.load("cat.png").convert()
         self.position = (0,0)
+    def moveDown(self):
+        x = self.position[0]
+        y = self.position[1]
+        self.position = (x, y+10)
 
 
 if __name__ == "__main__" :
