@@ -8,7 +8,6 @@ from pygame.locals import *
 
 class Game:
     def on_execute(self):
-        print("poop")
         pass
 
 if __name__ == "__main__" :
