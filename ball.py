@@ -17,7 +17,6 @@ class Ball(GameObject):
         self.screen_height = size[1]
         self.wallHit = None # marks where we hit a wall
         self.direction = random.randint(0,16) * 22.5
-        print(self.direction)
 
     def moveDown(self):
         pass
@@ -26,7 +25,6 @@ class Ball(GameObject):
         self.detectHit()
 
         if not self.wallHit == None:
-            print("hit")
             self.direction += 90
             if self.direction > 360:
                 self.direction -= 360

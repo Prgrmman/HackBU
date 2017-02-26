@@ -20,6 +20,7 @@ class Game:
 
     def on_init(self):
         pygame.init()
+        pygame.key.set_repeat(50,50)
         pygame.mixer.music.load('sounds/bgm.mp3')
         pygame.mixer.music.play(-1)
         self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
@@ -32,7 +33,10 @@ class Game:
         if event.type == pygame.QUIT:
             self._running = False
         elif event.type == KEYDOWN:
-            self.on_key_down(event)
+            if event.key == pygame.K_w:
+                print("w")
+            if event.key == pygame.K_s:
+                print("s")
 
     def on_loop(self):
         pass
