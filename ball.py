@@ -42,14 +42,14 @@ class Ball(GameObject):
     def detectHit(self):
         x = self.rect.x
         y = self.rect.y
-        if x < 22 or x + self.rect.width > self.screen_width or y < 0 or y + self.rect.height > self.screen_height - 70:
+        if x < 20 or x + self.rect.width > self.screen_width or y < 0 or y + self.rect.height > self.screen_height - 70:
             return True
         return False
 
     def findWall(self,hit):
         x = hit[0]
         y = hit[1]
-        if x < 22:
+        if x < 20:
             return 'left'
         elif x + self.rect.width >= self.screen_width:
             return 'right'
@@ -62,6 +62,7 @@ class Ball(GameObject):
 
     def getDirection(self,wall): #add to change depending on imcoming angle
         angs = self.angs
+        print(wall)
         if wall == 'right':
             if self.direction == angs[3]:
                 return self.angs[5]
@@ -79,6 +80,7 @@ class Ball(GameObject):
                 return self.angs[11]
             return self.angs[10]
         if wall == 'left' or wall == 'pad':
+            print(self.direction)
             if self.direction == angs[5]:
                 return self.angs[3]
             if self.direction == angs[6]:
@@ -93,7 +95,7 @@ class Ball(GameObject):
                 return self.angs[14]
             if self.direction == angs[11]:
                 return self.angs[13]
-            return self.angs[13]
+            return self.angs[0]
         if wall == 'top':
             if self.direction == angs[7]:
                 return self.angs[9]
