@@ -39,10 +39,10 @@ running = True
 score = 0
 
 gameObjs['hud'] = HUD(screen)
-gameObjs['ball'] = Ball(500, 500, size)
+gameObjs['ball'] = [Ball(500, 500, size)]
 gameObjs['paddle'] = Paddle(0,0,size)
 objectList.add(gameObjs['paddle'])
-objectList.add(gameObjs['ball'])
+objectList.add(gameObjs['ball'][0])
 
 # Game objects
 def on_event(event):
@@ -57,7 +57,7 @@ def on_event(event):
             
 def on_loop():
     global gameObjs, score
-    ball = gameObjs['ball']
+    ball = gameObjs['ball'][0]
     paddle = gameObjs['paddle']
     hud = gameObjs['hud']
     if pygame.sprite.collide_rect(ball, paddle):
