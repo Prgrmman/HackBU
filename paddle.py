@@ -29,7 +29,7 @@ class Paddle(GameObject):
                 stop = 1
         elif upordown == 'down':
             self.direction = 270
-            if y + self.rect.height > self.screen_height:
+            if y + self.rect.height > self.screen_height - 70:
                 stop = 1
         if stop == 0:
             self.rect.y -= sin(radians(self.direction)) * self.speed

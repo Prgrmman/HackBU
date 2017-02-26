@@ -51,6 +51,8 @@ class Game:
     def on_loop(self):
         if pygame.sprite.collide_rect(self.ball, self.paddle):
             self.ball.sendHit()
+            self.score += 1
+            self.hud.updateScore(self.score)
 
     def on_render(self):
         self.drawBackgound()
