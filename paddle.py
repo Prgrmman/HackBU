@@ -13,10 +13,14 @@ class Paddle(GameObject):
         self.speed = 3; #need to change this according to how fast we want paddle to move
         self.screen_width =  size[0]
         self.screen_height = size[1]
-        self.direction = 
+        self.direction = 0
 
     def update(self):
         pass
 
-    def move(self):
-        pass
+    def move(self, upordown):
+        if upordown == 'up':
+            self.direction = 90
+        elif upordown == 'down':
+            self.direction = 270
+        self.rect.y -= sin(radians(self.direction)) * self.speed
