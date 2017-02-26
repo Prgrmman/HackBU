@@ -72,7 +72,7 @@ def on_loop():
             ball.sendHit()
             score += 1
             hud.updateScore(score)
-            if score % 10 == 0:
+            if score % 5 == 0:
                 ball = Ball(500, 500, size)
                 gameObjs['ball'].append(ball)
                 objectList.add(ball)
