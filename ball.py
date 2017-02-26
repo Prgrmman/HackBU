@@ -18,8 +18,6 @@ class Ball(GameObject):
         self.hit = None # marks where we hit a wall
         self.direction = random.randint(0,16) * 22.5
         self.angs = [x * 22.5 for x in list(range(0,17))]
-        self.meow = pygame.mixer.Sound('sounds/meow.mp3')
-        effect.play()
 
     def moveDown(self):
         pass
@@ -60,7 +58,6 @@ class Ball(GameObject):
         elif y + self.rect.height >= self.screen_height - 70:
             return 'bottom'
         else:
-            meow.play()
             return 'pad'
 
     def getDirection(self,wall): #add to change depending on imcoming angle
