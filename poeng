@@ -38,7 +38,7 @@ meow = pygame.mixer.Sound('sounds/meow.wav')
 meow.set_volume(0.2)
 screen = pygame.display.set_mode(size, pygame.HWSURFACE | pygame.DOUBLEBUF)
 running = True
-score = 0
+score = 1
 
 gameObjs['hud'] = HUD(screen)
 gameObjs['ball'] = [Ball(500, 500, size)]
@@ -76,6 +76,13 @@ def on_loop():
                 ball = Ball(500, 500, size)
                 gameObjs['ball'].append(ball)
                 objectList.add(ball)
+
+        hit = (ball.rect.x, ball.rect.y)
+        if ball.findWall(hit) == 'left':
+            score -=1
+            hud.updateScore(score)
+            if score < 0:
+                pygame.quit()
 
 
 def on_render():
