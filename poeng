@@ -14,6 +14,7 @@ class Game:
         self.screen = None
         self.size = self.weight, self.height = 1280, 960
         self.clock = pygame.time.Clock()
+        self.bgColor = (210,210,210)
 
 
     def on_key_down(self, event):
@@ -27,10 +28,10 @@ class Game:
         self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         self._running = True
         self.objectList = pygame.sprite.Group()
-        ball = Ball(500,500, self.size)
+        self.ball = Ball(500,500, self.size)
         self.paddle = Paddle(0,0, self.size)
         self.objectList.add(self.paddle)
-        self.objectList.add(ball)
+        self.objectList.add(self.ball)
 
     def on_event(self, event):
         if event.type == pygame.QUIT:
@@ -43,7 +44,9 @@ class Game:
                 self.paddle.move('down')
 
     def on_loop(self):
-        pass
+        if pygame.sprite.collide_rect(self.ball, self.paddle):
+            print("Collide")
+            self.ball.sendHit()
     def on_render(self):
         self.drawBackgound()
         self.objectList.draw(self.screen)
@@ -62,12 +65,12 @@ class Game:
         while( self._running ):
             for event in pygame.event.get():
                 self.on_event(event)
-                self.on_loop()
+            self.on_loop()
             self.on_render()
         self.on_cleanup()
 
     def drawBackgound(self):
-        self.screen.fill((0,0,0))
+        self.screen.fill(self.bgColor)
 
 
 if __name__ == "__main__" :
