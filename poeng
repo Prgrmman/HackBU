@@ -25,7 +25,7 @@ class Game:
         self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         self._running = True
         self.objectList = pygame.sprite.Group()
-        ball = Ball(0,0, self.size)
+        ball = Ball(500,500, self.size)
         self.objectList.add(ball)
 
     def on_event(self, event):
