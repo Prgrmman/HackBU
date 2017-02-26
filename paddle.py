@@ -11,7 +11,7 @@ class Paddle(GameObject):
         self.rect = self.image.get_rect()
         self.rect.x = x + 1
         self.rect.y = y
-        self.speed = 3; #need to change this according to how fast we want paddle to move
+        self.speed = 50; #need to change this according to how fast we want paddle to move
         self.screen_width =  size[0]
         self.screen_height = size[1]
         self.direction = 0
