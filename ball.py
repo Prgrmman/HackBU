@@ -58,7 +58,7 @@ class Ball(GameObject):
         elif y + self.rect.height >= self.screen_height - 70:
             return 'bottom'
 
-    def getDirection(self,wall):
+    def getDirection(self,wall): #add to change depending on imcoming angle
         if wall == 'right':
             print("bottom")
             return self.angs[10]
