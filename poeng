@@ -35,6 +35,7 @@ pygame.key.set_repeat(1,1)
 pygame.mixer.music.load(music)
 pygame.mixer.music.play(-1)
 meow = pygame.mixer.Sound('sounds/meow.wav')
+meow.set_volume(0.2)
 screen = pygame.display.set_mode(size, pygame.HWSURFACE | pygame.DOUBLEBUF)
 running = True
 score = 0
