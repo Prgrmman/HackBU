@@ -10,8 +10,8 @@ class Paddle(GameObject):
         self.image = pygame.image.load('assets/paddle.gif').convert()
         self.rect = self.image.get_rect()
         self.rect.x = x + 1
-        self.rect.y = y
-        self.speed = 50; #need to change this according to how fast we want paddle to move
+        self.rect.y = y + 1
+        self.speed = 10; #need to change this according to how fast we want paddle to move
         self.screen_width =  size[0]
         self.screen_height = size[1]
         self.direction = 0
@@ -20,8 +20,17 @@ class Paddle(GameObject):
         pass
 
     def move(self, upordown):
+        x = self.rect.x
+        y = self.rect.y
+        stop = 0
         if upordown == 'up':
             self.direction = 90
+            if y < 0:
+                stop = 1
         elif upordown == 'down':
             self.direction = 270
-        self.rect.y -= sin(radians(self.direction)) * self.speed
+            if y + self.rect.height > self.screen_height:
+                stop = 1
+        if stop == 0:
+            self.rect.y -= sin(radians(self.direction)) * self.speed
+        stop = 0
