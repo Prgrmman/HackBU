@@ -29,11 +29,12 @@ objectList = pygame.sprite.Group() # used for sprites
 
 
 # Init everything
-
+pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
 pygame.key.set_repeat(1,1)
 pygame.mixer.music.load(music)
 pygame.mixer.music.play(-1)
+meow = pygame.mixer.Sound('sounds/meow.wav')
 screen = pygame.display.set_mode(size, pygame.HWSURFACE | pygame.DOUBLEBUF)
 running = True
 score = 0
@@ -67,6 +68,7 @@ def on_loop():
     hud = gameObjs['hud']
     for ball in balls:
         if pygame.sprite.collide_rect(ball, paddle):
+            meow.play()
             ball.sendHit()
             score += 1
             hud.updateScore(score)
