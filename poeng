@@ -10,77 +10,91 @@ from text import Text
 from infobar import HUD
 from pygame.locals import *
 
-class Game:
-    def __init__(self):
-        self._running = True
-        self.screen = None
-        self.size = self.weight, self.height = 1280, 960
-        self.clock = pygame.time.Clock()
-        self.bgColor = (210,210,210)
+# Game attributes
+running = False
+screen = None
+width = 1280
+height = 960
+size = (width, height)
+clock = pygame.time.Clock()
+bgColor = (210,210,210)
+music = 'sounds/bgm.mp3'
+
+# Game objects
+gameObjs = dict()
+gameObjs['hud'] = None
+gameObjs['ball'] = None
+gameObjs['paddle'] = None
+objectList = pygame.sprite.Group() # used for sprites
 
 
-    def on_key_down(self, event):
-        print("poop")
+# Init everything
 
-    def on_init(self):
-        pygame.init()
-        pygame.key.set_repeat(1,1)
-        pygame.mixer.music.load('sounds/bgm.mp3')
-        pygame.mixer.music.play(-1)
-        self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
-        self._running = True
-        self.score = 0
+pygame.init()
+pygame.key.set_repeat(1,1)
+pygame.mixer.music.load(music)
+pygame.mixer.music.play(-1)
+screen = pygame.display.set_mode(size, pygame.HWSURFACE | pygame.DOUBLEBUF)
+running = True
+score = 0
 
-        self.hud = HUD(self.screen)
-        self.objectList = pygame.sprite.Group()
-        self.ball = Ball(500,500, self.size)
-        self.paddle = Paddle(0,0, self.size)
-        self.objectList.add(self.paddle)
-        self.objectList.add(self.ball)
+gameObjs['hud'] = HUD(screen)
+gameObjs['ball'] = Ball(500, 500, size)
+gameObjs['paddle'] = Paddle(0,0,size)
+objectList.add(gameObjs['paddle'])
+objectList.add(gameObjs['ball'])
 
-    def on_event(self, event):
-        if event.type == pygame.QUIT:
-            self._running = False
-        elif event.type == KEYDOWN:
-            if event.key == pygame.K_w:
-                self.paddle.move('up')
-
-            if event.key == pygame.K_s:
-                self.paddle.move('down')
-
-    def on_loop(self):
-        if pygame.sprite.collide_rect(self.ball, self.paddle):
-            self.ball.sendHit()
-            self.score += 1
-            self.hud.updateScore(self.score)
-
-    def on_render(self):
-        self.drawBackgound()
-        self.objectList.draw(self.screen)
-        self.objectList.update()
-        self.hud.draw()
-        self.clock.tick(100)
-        pygame.display.flip()
-
-    def on_cleanup(self):
-        pygame.quit()
-
-    def on_execute(self):
-        if self.on_init() == False:
-            self._running = False
-
-        #----- Main game loop ------
-        while( self._running ):
-            for event in pygame.event.get():
-                self.on_event(event)
-            self.on_loop()
-            self.on_render()
-        self.on_cleanup()
-
-    def drawBackgound(self):
-        self.screen.fill(self.bgColor)
+# Game objects
+def on_event(event):
+    global running, gameObjs
+    if event.type == pygame.QUIT:
+        running = False
+    elif event.type == KEYDOWN:
+        if event.key == pygame.K_w:
+            gameObjs['paddle'].move('up')
+        if event.key == pygame.K_s:
+            gameObjs['paddle'].move('down')
+            
+def on_loop():
+    global gameObjs, score
+    ball = gameObjs['ball']
+    paddle = gameObjs['paddle']
+    hud = gameObjs['hud']
+    if pygame.sprite.collide_rect(ball, paddle):
+        ball.sendHit()
+        score += 1
+        hud.updateScore(score)
 
 
-if __name__ == "__main__" :
-    game = Game()
-    game.on_execute()
+def on_render():
+    global objectList, gameObjs, screen, clock
+    hud = gameObjs['hud']
+    drawBackground()
+    objectList.draw(screen)
+    objectList.update()
+    hud.draw()
+    clock.tick(100)
+    pygame.display.flip()
+
+def on_cleanup():
+    pygame.quit()
+
+
+def on_execute():
+    global running
+    while(running):
+        for event in pygame.event.get():
+            on_event(event)
+        on_loop()
+        on_render()
+    on_cleanup()
+
+
+
+def drawBackground():
+    global screen, bgColor
+    screen.fill(bgColor)
+
+if __name__ == "__main__":
+    on_execute()
+
