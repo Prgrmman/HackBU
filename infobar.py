@@ -2,6 +2,7 @@
 import pygame
 from pygame.locals import *
 from text import Text
+from chatterbot import ChatBot
 
 
 class HUD(object):
@@ -13,6 +14,8 @@ class HUD(object):
         self.scoreText= Text(0,890, str(0))
         self.text = "hello"
         self.randomBar = Text(500, 890, self.text)
+        self.chatbot = ChatBot('Ron Obious', trainer='chatterbot.trainers.ChatterBotCorpusTrainer')
+        self.chatbot.train("chatterbot.corpus.english")
 
     def updateScore(self, score):
         self.scoreText.changeText(str(score))
