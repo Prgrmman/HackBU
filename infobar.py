@@ -15,7 +15,7 @@ class HUD(object):
         self.height = 70 # height above bottom (y = 960)
         self.scoreText= Text(0,890, str(0), 100)
         self.text = "hello"
-        self.randomBar = Text(500, 890, self.text, 20)
+        self.randomBar = Text(150, 920, self.text, 40)
 
     def updateScore(self, score):
         self.scoreText.changeText(str(score))
@@ -25,8 +25,20 @@ class HUD(object):
             out, err = p.communicate()
             out = str(out)
             out = out.replace("\"", '')
-            out = out.replace("\\", '')
-            print(out)
+            out = out.replace("\\n", '')
+            out = out.replace("\\t", '')
+            out = ''.join([char for char in out if char.isalnum() or char == ' ' or char in ".,?!"])
+            out = out[1:]
+            end = out.find('.')
+            out = out[0:end]
+            if len(out) > 70:
+                out = out[0:70]
+                out += "..."
+
+
+            self.text = out
+            self.randomBar.changeText(self.text)
+            print(len(out))
 
         thread = threading.Thread(target = runBot)
         thread.start()
