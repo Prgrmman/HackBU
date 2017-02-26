@@ -68,7 +68,6 @@ def on_loop():
     hud = gameObjs['hud']
     for ball in balls:
         if pygame.sprite.collide_rect(ball, paddle):
-            print("hit")
             meow.play()
             ball.sendHit()
             score += 1
