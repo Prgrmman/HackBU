@@ -56,6 +56,7 @@ class Game:
         self.drawBackgound()
         self.objectList.draw(self.screen)
         self.objectList.update()
+        self.hud.draw()
         self.clock.tick(100)
         pygame.display.flip()
 
