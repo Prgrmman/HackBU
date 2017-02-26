@@ -32,7 +32,7 @@ class Ball(GameObject):
         self.rect.x += cos(radians(self.direction)) * self.speed
         self.rect.y -= sin(radians(self.direction)) * self.speed
 
-    def sendHit(self):
+    def sendHit(self): #fix this for collisions with paddle
         self.hit = (self.rect.x, self.rect.y)
         changeDirection =  self.getDirection(self.findWall(self.hit)) * 1.0
         self.direction = changeDirection * 1.0
@@ -71,5 +71,5 @@ class Ball(GameObject):
         if wall == 'bottom':
             print("bottom")
             return self.angs[3]
-        return self.angs[7]
+        return self.angs[2]
 
