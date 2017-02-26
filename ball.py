@@ -12,7 +12,7 @@ class Ball(GameObject):
         self.rect = self.image.get_rect()
         self.rect.x = x + 1
         self.rect.y = y
-        self.speed = 3
+        self.speed = 10
         self.screen_width = size[0]
         self.screen_height = size[1]
         self.hit = None # marks where we hit a wall
@@ -57,19 +57,74 @@ class Ball(GameObject):
             return 'top'
         elif y + self.rect.height >= self.screen_height - 70:
             return 'bottom'
+        else:
+            return 'pad'
 
     def getDirection(self,wall): #add to change depending on imcoming angle
+        angs = self.angs
         if wall == 'right':
-            print("bottom")
+            if self.direction == angs[3]:
+                return self.angs[5]
+            if self.direction == angs[2]:
+                return self.angs[6]
+            if self.direction == angs[1]:
+                return self.angs[7]
+            if self.direction == angs[0]:
+                return self.angs[7]
+            if self.direction == angs[15]:
+                return self.angs[9]
+            if self.direction == angs[14]:
+                return self.angs[10]
+            if self.direction == angs[13]:
+                return self.angs[11]
             return self.angs[10]
-        if wall == 'left':
-            print("bottom")
+        if wall == 'left' or wall == 'pad':
+            if self.direction == angs[5]:
+                return self.angs[3]
+            if self.direction == angs[6]:
+                return self.angs[2]
+            if self.direction == angs[7]:
+                return self.angs[1]
+            if self.direction == angs[8]:
+                return self.angs[1]
+            if self.direction == angs[9]:
+                return self.angs[15]
+            if self.direction == angs[10]:
+                return self.angs[14]
+            if self.direction == angs[11]:
+                return self.angs[13]
             return self.angs[13]
         if wall == 'top':
-            print("bottom")
+            if self.direction == angs[7]:
+                return self.angs[9]
+            if self.direction == angs[6]:
+                return self.angs[10]
+            if self.direction == angs[5]:
+                return self.angs[11]
+            if self.direction == angs[4]:
+                return self.angs[11]
+            if self.direction == angs[3]:
+                return self.angs[13]
+            if self.direction == angs[2]:
+                return self.angs[14]
+            if self.direction == angs[1]:
+                return self.angs[15]
             return self.angs[10]
         if wall == 'bottom':
-            print("bottom")
+            if self.direction == angs[9]:
+                return self.angs[7]
+            if self.direction == angs[10]:
+                return self.angs[6]
+            if self.direction == angs[11]:
+                return self.angs[5]
+            if self.direction == angs[12]:
+                return self.angs[3]
+            if self.direction == angs[13]:
+                return self.angs[2]
+            if self.direction == angs[14]:
+                return self.angs[2]
+            if self.direction == angs[15]:
+                return self.angs[1]
             return self.angs[3]
         return self.angs[2]
 
