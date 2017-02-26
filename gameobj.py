@@ -10,8 +10,6 @@ class GameObject(pygame.sprite.Sprite):
         self.image = None
         self.speed = 0
         self.direction = 0.0 # degrees
-        self.x = 0
-        self.y = 0
     def update(self):
         pass
 

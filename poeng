@@ -25,7 +25,7 @@ class Game:
         self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         self._running = True
         self.objectList = pygame.sprite.Group()
-        ball = Ball(0,0)
+        ball = Ball(0,0, self.size)
         self.objectList.add(ball)
 
     def on_event(self, event):
@@ -40,7 +40,7 @@ class Game:
         self.drawBackgound()
         self.objectList.draw(self.screen)
         self.objectList.update()
-        self.clock.tick(60)
+        self.clock.tick(100)
         pygame.display.flip()
 
     def on_cleanup(self):
