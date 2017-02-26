@@ -79,7 +79,7 @@ def on_loop():
 
         hit = (ball.rect.x, ball.rect.y)
         if ball.findWall(hit) == 'left':
-            score -=1
+            score -=2
             hud.updateScore(score)
             if score < 0:
                 pygame.quit()
