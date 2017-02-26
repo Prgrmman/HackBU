@@ -1,18 +1,22 @@
 import pygame
+import math
+from gameobj import GameObject
 from pygame.locals import *
 
 # This is a ball object
-class Ball:
-    def __init__(self):
-        self.image = pygame.image.load("assets/cat.gif").convert()
-        self.position = (0,0)
+class Ball(GameObject):
+    def __init__(self, x, y):
+        GameObject.__init__(self)
+        self.image = pygame.image.load('assets/cat.gif').convert()
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
     def moveDown(self):
-        x = self.position[0]
-        y = self.position[1]
-        self.position = (x, y+10)
+        pass
+    def update(self):
+        self.rect.y += 1
+
     def scale(self):
-        """shrink the image by 5 percent"""
-        width = self.image.get_width()
-        height = self.image.get_height()
-        self.image = pygame.transform.scale(self.image, (int(0.95 * width), int(0.95 * height)))
+        pass
 
