@@ -10,12 +10,15 @@ class HUD(object):
         self.screen = screen
         self.bgColor = (150, 150, 150)
         self.height = 70 # height above bottom (y = 960)
-        self.text = Text(0,890, str(0))
+        self.scoreText= Text(0,890, str(0))
+        self.text = "hello"
+        self.randomBar = Text(500, 890, self.text)
 
     def updateScore(self, score):
-        self.text.changeText(str(score))
+        self.scoreText.changeText(str(score))
     def draw(self):
-        self.screen.blit(self.text.image, self.text.rect)
+        self.screen.blit(self.scoreText.image, self.scoreText.rect)
+        self.screen.blit(self.randomBar.image, self.randomBar.rect)
 
 
 
