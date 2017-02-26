@@ -12,7 +12,7 @@ class Ball(GameObject):
         self.rect = self.image.get_rect()
         self.rect.x = x + 1
         self.rect.y = y
-        self.speed = 10
+        self.speed = 5
         self.screen_width = size[0]
         self.screen_height = size[1]
         self.hit = None # marks where we hit a wall

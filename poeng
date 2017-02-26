@@ -38,18 +38,17 @@ meow = pygame.mixer.Sound('sounds/meow.wav')
 meow.set_volume(0.2)
 screen = pygame.display.set_mode(size, pygame.HWSURFACE | pygame.DOUBLEBUF)
 running = True
-score = 0
+score = 1
 
 gameObjs['hud'] = HUD(screen)
 gameObjs['ball'] = [Ball(500, 500, size)]
 gameObjs['paddle'] = Paddle(0,0,size)
 objectList.add(gameObjs['paddle'])
 
-# number of balls
-for i in range(2):
-    ball = Ball(500,500, size)
-    gameObjs['ball'].append(ball)
-    objectList.add(ball)
+# Add one ball
+ball = Ball(500,500, size)
+gameObjs['ball'].append(ball)
+objectList.add(ball)
 
 # Game objects
 def on_event(event):
@@ -73,10 +72,17 @@ def on_loop():
             ball.sendHit()
             score += 1
             hud.updateScore(score)
-            if score % 5 == 0:
+            if score % 10 == 0:
                 ball = Ball(500, 500, size)
                 gameObjs['ball'].append(ball)
                 objectList.add(ball)
+
+        hit = (ball.rect.x, ball.rect.y)
+        if ball.findWall(hit) == 'left':
+            score -=1
+            hud.updateScore(score)
+            if score < 0:
+                pygame.quit()
 
 
 def on_render():

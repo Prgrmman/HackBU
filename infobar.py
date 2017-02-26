@@ -38,7 +38,6 @@ class HUD(object):
 
             self.text = out
             self.randomBar.changeText(self.text)
-            print(len(out))
 
         thread = threading.Thread(target = runBot)
         thread.start()
