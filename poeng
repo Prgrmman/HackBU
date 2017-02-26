@@ -5,6 +5,7 @@ Main source file for poeng game
 
 import pygame
 from ball import Ball
+from paddle import Paddle
 from pygame.locals import *
 
 class Game:
@@ -27,6 +28,8 @@ class Game:
         self._running = True
         self.objectList = pygame.sprite.Group()
         ball = Ball(500,500, self.size)
+        self.paddle = Paddle(0,0, self.size)
+        self.objectList.add(self.paddle)
         self.objectList.add(ball)
 
     def on_event(self, event):
@@ -34,9 +37,10 @@ class Game:
             self._running = False
         elif event.type == KEYDOWN:
             if event.key == pygame.K_w:
-                print("w")
+                self.paddle.move('up')
+
             if event.key == pygame.K_s:
-                print("s")
+                self.paddle.move('down')
 
     def on_loop(self):
         pass

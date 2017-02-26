@@ -1,10 +1,11 @@
 import pygame
 from gameobj import GameObject
 from pygame.locals import *
+from math import sin, radians
 
 #This is a paddle object
 class Paddle(GameObject):
-    def __init__(self, x, y, size)
+    def __init__(self, x, y, size):
         GameObject.__init__(self)
         self.image = pygame.image.load('assets/paddle.gif').convert()
         self.rect = self.image.get_rect()
