@@ -6,6 +6,8 @@ Main source file for poeng game
 import pygame
 from ball import Ball
 from paddle import Paddle
+from text import Text
+from infobar import HUD
 from pygame.locals import *
 
 class Game:
@@ -27,6 +29,9 @@ class Game:
         pygame.mixer.music.play(-1)
         self.screen = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         self._running = True
+        self.score = 0
+
+        self.hud = HUD(self.screen)
         self.objectList = pygame.sprite.Group()
         self.ball = Ball(500,500, self.size)
         self.paddle = Paddle(0,0, self.size)
@@ -45,8 +50,8 @@ class Game:
 
     def on_loop(self):
         if pygame.sprite.collide_rect(self.ball, self.paddle):
-            print("Collide")
             self.ball.sendHit()
+
     def on_render(self):
         self.drawBackgound()
         self.objectList.draw(self.screen)

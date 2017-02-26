@@ -33,4 +33,3 @@ class Paddle(GameObject):
                 stop = 1
         if stop == 0:
             self.rect.y -= sin(radians(self.direction)) * self.speed
-        stop = 0
