@@ -42,14 +42,14 @@ class Ball(GameObject):
     def detectHit(self):
         x = self.rect.x
         y = self.rect.y
-        if x < 0 or x + self.rect.width > self.screen_width or y < 0 or y + self.rect.height > self.screen_height - 70:
+        if x < 22 or x + self.rect.width > self.screen_width or y < 0 or y + self.rect.height > self.screen_height - 70:
             return True
         return False
 
     def findWall(self,hit):
         x = hit[0]
         y = hit[1]
-        if x <= 0:
+        if x < 22:
             return 'left'
         elif x + self.rect.width >= self.screen_width:
             return 'right'
