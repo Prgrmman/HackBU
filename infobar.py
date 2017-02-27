@@ -37,7 +37,6 @@ class HUD(object):
                 p = subprocess.Popen(['fortune', ''], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 out, err = p.communicate()
                 out = str(out)
-                out = out.replace("\"", '')
                 out = out.replace("\\n", '')
                 out = out.replace("\\t", '')
                 out = ''.join([char for char in out if char.isalnum() or char == ' ' or char in ".,?!"])

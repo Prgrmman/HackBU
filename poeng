@@ -21,12 +21,6 @@ clock = pygame.time.Clock()
 bgColor = (210,210,210)
 music = 'sounds/bgm.mp3'
 
-# Game objects
-gameObjs = dict()
-gameObjs['hud'] = None
-gameObjs['ball'] = None
-gameObjs['paddle'] = None
-objectList = pygame.sprite.Group() # used for sprites
 
 
 # Init everything
@@ -40,10 +34,14 @@ meow.set_volume(0.2)
 screen = pygame.display.set_mode(size, pygame.HWSURFACE | pygame.DOUBLEBUF)
 running = True
 score = 1
+maxScore = score # keep track of highest score
 
+# Game objects
+gameObjs = {}
 gameObjs['hud'] = HUD(screen)
 gameObjs['ball'] = [Ball(500, 500, size)]
 gameObjs['paddle'] = Paddle(0,0,size)
+objectList = pygame.sprite.Group() # used for sprites
 objectList.add(gameObjs['paddle'])
 
 # Add one ball
@@ -63,7 +61,7 @@ def on_event(event):
             gameObjs['paddle'].move('down')
             
 def on_loop():
-    global gameObjs, score
+    global gameObjs, score, maxScore
     balls = gameObjs['ball']
     paddle = gameObjs['paddle']
     hud = gameObjs['hud']
@@ -73,7 +71,7 @@ def on_loop():
             ball.sendHit()
             score += 1
             hud.updateScore(score)
-            if score % 5 == 0:
+            if maxScore % 5 == 0:
                 ball = Ball(500, 500, size)
                 gameObjs['ball'].append(ball)
                 objectList.add(ball)
@@ -83,7 +81,10 @@ def on_loop():
             score -=2
             hud.updateScore(score)
             if score < 0:
-                sys.exit()
+                on_cleanup()
+    # keep track of max score
+    if score > maxScore:
+        maxScore = score
 
 
 def on_render():
@@ -97,7 +98,10 @@ def on_render():
     pygame.display.flip()
 
 def on_cleanup():
-    pygame.quit()
+    global maxScore
+    #pygame.quit()
+    print(maxScore)
+    sys.exit()
 
 
 def on_execute():
