@@ -10,12 +10,14 @@ import random
 class HUD(object):
 
     def __init__(self, screen):
+        displayWidth = screen.get_width()
+        displayHeight = screen.get_height()
         self.screen = screen
         self.bgColor = (150, 150, 150)
-        self.height = 70 # height above bottom (y = 960)
-        self.scoreText= Text(0,890, str(0), 100)
+        self.height = (displayHeight * 7) / 100
+        self.scoreText= Text(0,(0.9*displayHeight), str(0), (displayHeight / 15) )
         self.text = "hello"
-        self.randomBar = Text(150, 920, self.text, 40)
+        self.randomBar = Text((0.2*displayWidth),(0.9*displayHeight), self.text, (displayHeight / 20))
 
     def updateScore(self, score):
         self.scoreText.changeText(str(score))
