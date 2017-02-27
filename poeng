@@ -2,7 +2,7 @@
 '''
 Main source file for poeng game
 '''
-
+import sys
 import pygame
 from ball import Ball
 from paddle import Paddle
@@ -82,7 +82,7 @@ def on_loop():
             score -=2
             hud.updateScore(score)
             if score < 0:
-                pygame.quit()
+                sys.exit()
 
 
 def on_render():

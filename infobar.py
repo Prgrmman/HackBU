@@ -37,10 +37,10 @@ class HUD(object):
 
 
             self.text = out
-            self.randomBar.changeText(self.text)
 
         thread = threading.Thread(target = runBot)
         thread.start()
+        self.randomBar.changeText(self.text)
 
     def draw(self):
         self.screen.blit(self.scoreText.image, self.scoreText.rect)
