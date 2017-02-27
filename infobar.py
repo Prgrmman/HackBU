@@ -1,10 +1,10 @@
 
 import pygame
 import threading
-import subprocess
+#import subprocess
 from pygame.locals import *
 from text import Text
-
+import random
 
 
 class HUD(object):
@@ -21,6 +21,14 @@ class HUD(object):
         self.scoreText.changeText(str(score))
 
         def runBot():
+            out = "default nonsense text"
+            if(random.random() > 0.5):
+                out = "Supremely delicious rice-a-roni paellas!"
+            else:
+                out = "Colorless green thoughts sleep furiously!"
+            # The fortune command isn't available on Windows!
+            # Find another way to generate random strings
+            """
             p = subprocess.Popen(['fortune', ''], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, err = p.communicate()
             out = str(out)
@@ -35,7 +43,7 @@ class HUD(object):
                 out = out[0:70]
                 out += "..."
 
-
+            """
             self.text = out
 
         thread = threading.Thread(target = runBot)
