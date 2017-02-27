@@ -39,7 +39,7 @@ maxScore = score # keep track of highest score
 # Game objects
 gameObjs = {}
 gameObjs['hud'] = HUD(screen)
-gameObjs['ball'] = [Ball(500, 500, size)]
+gameObjs['ball'] = []
 gameObjs['paddle'] = Paddle(0,0,size)
 objectList = pygame.sprite.Group() # used for sprites
 objectList.add(gameObjs['paddle'])
@@ -65,14 +65,24 @@ def on_loop():
     balls = gameObjs['ball']
     paddle = gameObjs['paddle']
     hud = gameObjs['hud']
+
+    # check for ball on ball collisions
+    ballList = [ball for ball in balls]
+    nBalls = len(ballList)
+    for i in range(nBalls):
+        for j in range(i+1,nBalls):
+            if pygame.sprite.collide_rect(ballList[i], ballList[j]):
+                ballList[i].catHit()
+
+
     for ball in balls:
         if pygame.sprite.collide_rect(ball, paddle):
             meow.play()
             ball.sendHit()
             score += 1
             hud.updateScore(score)
-            if maxScore % 5 == 0:
-                ball = Ball(500, 500, size)
+            if maxScore % 5 == 0 and maxScore > 0:
+                ball = Ball(500, 900, size)
                 gameObjs['ball'].append(ball)
                 objectList.add(ball)
 

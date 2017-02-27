@@ -39,6 +39,8 @@ class Ball(GameObject):
         #if self.direction > 360:
          #   self.direction -= 360
 
+    def catHit(self): # reverse direction of cat
+        print("Cat Hit")
     def detectHit(self):
         x = self.rect.x
         y = self.rect.y
