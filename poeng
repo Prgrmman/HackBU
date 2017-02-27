@@ -13,8 +13,9 @@ from pygame.locals import *
 # Game attributes
 running = False
 screen = None
-width = 1280
-height = 960
+# Find a way to accept width and height (or an enumerated size) as parameters
+width = 1000
+height = 500
 size = (width, height)
 clock = pygame.time.Clock()
 bgColor = (210,210,210)
