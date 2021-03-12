@@ -19,7 +19,7 @@ height = 750
 size = (width, height)
 clock = pygame.time.Clock()
 bgColor = (210,210,210)
-music = 'sounds/bgm.mp3'
+music = 'sounds/bgm.ogg'
 
 
 
